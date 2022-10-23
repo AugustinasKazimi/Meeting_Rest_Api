@@ -7,5 +7,7 @@ public interface MeetingService {
 
     Meeting_Entity createMeeting (Meeting_Details meetingDetails);
 
-    Meeting_Entity getMeeting (String meetingId, String responsiblePerson, String descriptionMeeting);
+    Meeting_Entity getMeeting (String meetingId, String responsiblePerson, String descriptionMeeting, String typeMeeting);
+
+    Meeting_Entity deleteMeeting(String id);
 }

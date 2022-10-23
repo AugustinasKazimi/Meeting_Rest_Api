@@ -35,16 +35,20 @@ public class MeetingServiceImpl implements MeetingService{
         String descriptionMeeting = meetingDetails.getDescriptionMeeting();
         returnValue.setDescriptionMeeting(descriptionMeeting);
 
+        String typeMeeting = meetingDetails.getTypeMeeting();
+        returnValue.setTypeMeeting(typeMeeting);
+
         if(meetings == null) meetings = new HashMap<>();
         meetings.put(meetingId, returnValue);
         meetings.put(responsiblePerson, returnValue);
         meetings.put(descriptionMeeting, returnValue);
+        meetings.put(typeMeeting, returnValue);
 
         return returnValue;
     }
 
     @Override
-    public Meeting_Entity getMeeting(String meetingId, String responsiblePerson, String descriptionMeeting) {
+    public Meeting_Entity getMeeting(String meetingId, String responsiblePerson, String descriptionMeeting, String typeMeeting) {
         if(meetings.containsKey(meetingId)){
             return meetings.get(meetingId);
         }
@@ -54,8 +58,18 @@ public class MeetingServiceImpl implements MeetingService{
         if(meetings.containsKey(descriptionMeeting)){
             return meetings.get(descriptionMeeting);
         }
+        if(meetings.containsKey(typeMeeting)){
+            return meetings.get(typeMeeting);
+        }
         else{
             return new ResponseEntity<Meeting_Entity>(HttpStatus.NO_CONTENT).getBody();
         }
+    }
+
+    @Override
+    public Meeting_Entity deleteMeeting(String id){
+
+        meetings.remove(id);
+        return new ResponseEntity<Meeting_Entity>(HttpStatus.OK).getBody();
     }
 }
